@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Melbote – IT Professional Services</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background: #0f0f11;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    header {
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+    }
+
+    header img.logo {
+      height: 50px;
+    }
+
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 500;
+    }
+
+    .hero {
+      height: 100vh;
+      background: url('Image.jpg') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      max-width: 900px;
+      animation: fadeIn 1.5s ease;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin-top: 20px;
+      opacity: 0.9;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    section {
+      padding: 80px 10%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 2.4rem;
+      margin-bottom: 20px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .service-card {
+      background: #151518;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0px 0px 20px rgba(0,0,0,0.4);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px;
+      opacity: 0.5;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="Image.jpg" class="logo" alt="Melbote Logo" />
+  <nav>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#mission">Mission</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Innovating Retail, Powering Digital Growth</h1>
+  <p>Melbote is the ANZ & Pacific arm of global technology leaders TechRyde and eMultec Solution — delivering POS innovation, enterprise integration, and digital transformation with global expertise and local delivery.</p>
+</section>
+
+<section id="about">
+  <h2>About Melbote</h2>
+  <p>Melbote is an Australian-based IT professional services consulting company and the ANZ & Pacific subsidiary of TechRyde and eMultec Solution. We deliver enterprise-grade technology services backed by global engineering excellence.</p>
+</section>
+
+<section id="mission">
+  <h2>Mission & Vision</h2>
+  <p><strong>Mission:</strong> Empower organisations with connected, intelligent, and modern digital technologies.</p>
+  <p><strong>Vision:</strong> Become the most trusted partner for POS modernisation, enterprise integrations, and digital transformation in the region.</p>
+</section>
+
+<section id="services">
+  <h2>Our Services</h2>
+  <div class="services-grid">
+    <div class="service-card"><h3>POS & Retail Integrations</h3><p>End-to-end POS modernisation, payment integrations, and multi-store system deployments.</p></div>
+    <div class="service-card"><h3>Salesforce Consulting</h3><p>Implementation, customisation, integration, and managed services.</p></div>
+    <div class="service-card"><h3>Digital Transformation</h3><p>Custom applications, automation, cloud-native systems, and AI-driven solutions.</p></div>
+    <div class="service-card"><h3>Product Engineering</h3><p>Microservices, API development, cloud engineering, and enterprise software builds.</p></div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact Us</h2>
+  <p>Email: info@melbote.com</p>
+  <p>Australia | New Zealand | Pacific</p>
+</section>
+
+<div class="footer">
+  © 2025 Melbote. All rights reserved.
+</div>
+
+</body>
+</html>
