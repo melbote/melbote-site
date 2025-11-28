@@ -1,135 +1,573 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Melbote — Digital Integrations</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-  body {
-    background: #0F0F10;
-    color: #E5E5E5;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melbote - IT & Digital Consulting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #333;
+            --secondary-color: #666;
+            --accent-color: #8C8C8C; /* Matching the logo's grey */
+            --light-grey: #f4f4f4;
+            --white: #fff;
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
 
-  /* Cursor glow */
-  .cursor-light {
-    pointer-events: none;
-    position: fixed;
-    width: 250px;
-    height: 250px;
-    background: radial-gradient(circle, rgba(255,69,58,0.25) 0%, transparent 70%);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    transition: opacity 0.3s ease;
-    opacity: 0;
-  }
+        body {
+            font-family: var(--font-body);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--primary-color);
+            background: var(--white);
+            scroll-behavior: smooth;
+        }
 
-  /* Preloader */
-  #preloader {
-    background: #0F0F10;
-    position: fixed;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-  }
-  .loader-dot {
-    width: 12px;
-    height: 12px;
-    margin: 0 6px;
-    background: #FF453A;
-    border-radius: 50%;
-    animation: bounce 0.6s infinite alternate;
-  }
-  .loader-dot:nth-child(2) { animation-delay: 0.2s; }
-  .loader-dot:nth-child(3) { animation-delay: 0.4s; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-  @keyframes bounce {
-    from { transform: translateY(0); opacity: 0.3; }
-    to   { transform: translateY(-12px); opacity: 1; }
-  }
+        /* Header */
+        header {
+            background: var(--white);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--light-grey);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-  /* Parallax */
-  .parallax {
-    transform: translateY(var(--scroll-offset));
-    transition: transform 0.15s linear;
-  }
-</style>
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px; /* Adjust as needed */
+            filter: grayscale(100%); /* To match the muted grey of the logo image */
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('https://source.unsplash.com/random/1600x900/?technology,futuristic,abstract') no-repeat center center/cover;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(230,230,230,0.1) 0%, rgba(200,200,200,0.1) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--white);
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+            background: var(--white);
+            border-bottom: 1px solid var(--light-grey);
+        }
+
+        section:nth-of-type(even) {
+            background: var(--light-grey);
+        }
+
+        section h2 {
+            font-family: var(--font-display);
+            font-size: 2.8em;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 15px auto 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .grid-item {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        .grid-item h3 {
+            font-family: var(--font-display);
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .grid-item p {
+            color: var(--secondary-color);
+        }
+
+        /* About Section specifics */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-text, .about-image {
+            flex: 1;
+            max-width: 800px;
+            text-align: left;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        /* Partners Section */
+        .partners-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .partner-logo {
+            flex-basis: 150px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border: 1px solid var(--light-grey);
+            border-radius: 5px;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .partner-logo img {
+            max-width: 100%;
+            max-height: 60px;
+            object-fit: contain;
+        }
+
+        /* Call to Action */
+        .cta {
+            text-align: center;
+            padding: 100px 20px;
+            background: var(--accent-color);
+            color: var(--white);
+            background: linear-gradient(135deg, var(--accent-color) 0%, #a0a0a0 100%);
+        }
+
+        .cta h2 {
+            color: var(--white);
+        }
+
+        .cta h2::after {
+            background: var(--white);
+        }
+
+        .cta p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+        .cta .btn {
+            background: var(--white);
+            color: var(--accent-color);
+        }
+
+        .cta .btn:hover {
+            background: var(--light-grey);
+            color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: var(--light-grey);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        footer .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            text-align: left;
+        }
+
+        footer .footer-col {
+            flex-basis: 25%;
+            padding: 20px;
+            min-width: 250px;
+        }
+
+        footer h3 {
+            color: var(--white);
+            font-family: var(--font-display);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        footer h3::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-color);
+            margin-top: 10px;
+        }
+
+        footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        footer ul li {
+            margin-bottom: 10px;
+        }
+
+        footer ul li a {
+            color: var(--light-grey);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer ul li a:hover {
+            color: var(--white);
+        }
+
+        footer p {
+            font-size: 0.9em;
+            line-height: 1.8;
+        }
+
+        .social-icons a {
+            color: var(--light-grey);
+            margin-right: 15px;
+            font-size: 1.5em;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            font-size: 0.85em;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 15px 10px;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            section h2 {
+                font-size: 2em;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .footer-col {
+                flex-basis: 100%;
+                text-align: center;
+            }
+
+            footer h3::after {
+                margin: 10px auto 0;
+            }
+        }
+    </style>
 </head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="your-melbote-logo.png" alt="Melbote Logo">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#partners">Partners</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<body class="overflow-x-hidden">
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Leading the Digital Transformation in Australia</h1>
+                <p>Melbote is the Australian arm of a pan-APAC technology leader, providing cutting-edge IT and digital consulting services to drive your business forward.</p>
+                <a href="#contact" class="btn">Get in Touch</a>
+            </div>
+        </section>
 
-<!-- Cursor glow -->
-<div id="cursorLight" class="cursor-light"></div>
+        <section id="services">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="grid">
+                    <div class="grid-item">
+                        <h3>Digital Strategy</h3>
+                        <p>Crafting bespoke digital roadmaps that align with your business objectives and market demands.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Cloud Solutions</h3>
+                        <p>Leveraging cloud technologies for scalable infrastructure, enhanced security, and operational efficiency.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Data Analytics</h3>
+                        <p>Transforming raw data into actionable insights to inform strategic decisions and foster growth.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Custom Software Development</h3>
+                        <p>Building innovative, tailor-made software solutions to meet your unique operational needs.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Cybersecurity</h3>
+                        <p>Protecting your digital assets with robust security frameworks and proactive threat management.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>IT Infrastructure Consulting</h3>
+                        <p>Optimizing your IT infrastructure for peak performance, reliability, and cost-effectiveness.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<!-- Preloader -->
-<div id="preloader">
-  <div class="flex">
-    <div class="loader-dot"></div>
-    <div class="loader-dot"></div>
-    <div class="loader-dot"></div>
-  </div>
-</div>
+        <section id="about">
+            <div class="container">
+                <h2>About Melbote</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Melbote is an IT professional services consulting company operating as the Australian subsidiary of a prominent pan-APAC technology leader. We are proud to work closely with our esteemed partners, <a href="https://techryde.com/" target="_blank">techryde.com</a> and <a href="https://emultitechsolution.com/" target="_blank">emultitechsolution.com</a>, bringing global expertise with a local touch.</p>
+                        <p>Our mission is to empower Australian businesses to navigate the complexities of the digital landscape. We combine deep industry knowledge with innovative technological solutions to help our clients achieve sustainable growth, operational excellence, and a competitive edge.</p>
+                        <p>We believe in building strong, collaborative relationships with our clients, understanding their challenges, and delivering impactful results. Our team of experienced consultants is dedicated to excellence, integrity, and driving real value for every project we undertake.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://source.unsplash.com/random/800x600/?office,teamwork,consulting" alt="Melbote Team Collaboration">
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<!-- NAV -->
-<nav class="fixed top-0 left-0 w-full z-50 bg-[#0F0F10]/80 backdrop-blur-xl border-b border-white/10">
-  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-    <h1 class="text-xl text-white font-light tracking-widest">MELBOTE</h1>
-    <div class="space-x-8 text-sm text-gray-300">
-      <a href="index.html" class="hover:text-white">Home</a>
-      <a href="about.html" class="hover:text-white">About</a>
-      <a href="services.html" class="hover:text-white">Services</a>
-      <a href="contact.html" class="hover:text-white">Contact</a>
-    </div>
-  </div>
-</nav>
+        <section id="partners">
+            <div class="container">
+                <h2>Our Global Network</h2>
+                <p style="text-align: center; font-size: 1.1em; color: var(--secondary-color); margin-bottom: 40px;">Melbote leverages the strength and innovation of our pan-APAC technology leaders to deliver unparalleled solutions.</p>
+                <div class="partners-grid">
+                    <a href="https://techryde.com/" target="_blank" class="partner-logo">
+                        <img src="https://via.placeholder.com/150x60?text=Techryde" alt="Techryde Logo">
+                    </a>
+                    <a href="https://emultitechsolution.com/" target="_blank" class="partner-logo">
+                        <img src="https://via.placeholder.com/150x60?text=Emultitechsolution" alt="Emultitechsolution Logo">
+                    </a>
+                    </div>
+            </div>
+        </section>
 
-<!-- HERO -->
-<section class="h-screen flex items-center justify-center text-center relative mt-24">
-  <div class="parallax" style="--scroll-offset:0px;">
-    <h2 class="text-6xl md:text-8xl text-white font-light tracking-tight">
-      Digital <span class="text-[#FF453A]">Integration</span>
-    </h2>
-    <p class="mt-6 text-lg text-gray-400">
-      POS • Retail Integrations • Salesforce • AI • Modern Applications
-    </p>
-  </div>
-</section>
+        <section class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Business?</h2>
+                <p>Partner with Melbote and unlock your full digital potential. Let's build the future together.</p>
+                <a href="#contact" class="btn">Start Your Transformation</a>
+            </div>
+        </section>
+    </main>
 
-<!-- CONTENT -->
-<section class="max-w-5xl mx-auto px-6 py-24">
-  <h3 class="text-3xl text-white mb-6">Crafting Modern Retail Solutions</h3>
-  <p class="text-gray-400 leading-relaxed">
-    We build future-focused digital systems for POS, retail, and enterprise ecosystems
-    using the latest integration, automation, and AI technologies.
-  </p>
-</section>
+    <footer>
+        <div class="container">
+            <div class="footer-col">
+                <h3>Melbote</h3>
+                <p>Leading the digital transformation in Australia, powered by global technology excellence.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#partners">Partners</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <p>
+                    Level 1, 123 Digital Drive<br>
+                    Sydney, NSW 2000<br>
+                    Australia<br>
+                    <a href="tel:+61212345678">+61 2 1234 5678</a><br>
+                    <a href="mailto:info@melbote.com">info@melbote.com</a>
+                </p>
+            </div>
+            <div class="footer-col" id="contact">
+                <h3>Inquiries</h3>
+                <p>Feel free to reach out to us for any consulting needs or partnership opportunities.</p>
+                <a href="mailto:info@melbote.com" class="btn" style="background: var(--accent-color); color: var(--white);">Email Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Melbote. All rights reserved. A subsidiary of a pan-APAC technology leader.</p>
+        </div>
+    </footer>
 
-<script>
-  /* Preloader disappear */
-  window.onload = () => {
-    document.getElementById("preloader").style.opacity = "0";
-    setTimeout(() => document.getElementById("preloader").style.display = "none", 500);
-  };
-
-  /* Cursor light animation */
-  const cursorLight = document.getElementById("cursorLight");
-  document.addEventListener("mousemove", (e) => {
-    cursorLight.style.left = e.clientX + "px";
-    cursorLight.style.top = e.clientY + "px";
-    cursorLight.style.opacity = 1;
-  });
-
-  /* Parallax scroll */
-  window.addEventListener("scroll", () => {
-    document.querySelectorAll(".parallax").forEach(el => {
-      const offset = window.scrollY * 0.2;
-      el.style.setProperty("--scroll-offset", offset + "px");
-    });
-  });
-</script>
-
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
 </body>
 </html>
