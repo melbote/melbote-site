@@ -1,152 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Melbote – IT Professional Services</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Inter", sans-serif;
-      background: #0f0f11;
-      color: #ffffff;
-      line-height: 1.6;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Melbote — Digital Integrations</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body {
+    background: #0F0F10;
+    color: #E5E5E5;
+  }
 
-    header {
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(10px);
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 50px;
-    }
+  /* Cursor glow */
+  .cursor-light {
+    pointer-events: none;
+    position: fixed;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(255,69,58,0.25) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+  }
 
-    header img.logo {
-      height: 50px;
-    }
+  /* Preloader */
+  #preloader {
+    background: #0F0F10;
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+  .loader-dot {
+    width: 12px;
+    height: 12px;
+    margin: 0 6px;
+    background: #FF453A;
+    border-radius: 50%;
+    animation: bounce 0.6s infinite alternate;
+  }
+  .loader-dot:nth-child(2) { animation-delay: 0.2s; }
+  .loader-dot:nth-child(3) { animation-delay: 0.4s; }
 
-    nav a {
-      color: #ffffff;
-      text-decoration: none;
-      margin-left: 25px;
-      font-weight: 500;
-    }
+  @keyframes bounce {
+    from { transform: translateY(0); opacity: 0.3; }
+    to   { transform: translateY(-12px); opacity: 1; }
+  }
 
-    .hero {
-      height: 100vh;
-      background: url('Image.jpg') center/cover no-repeat;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 20px;
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      max-width: 900px;
-      animation: fadeIn 1.5s ease;
-    }
-
-    .hero p {
-      font-size: 1.3rem;
-      max-width: 700px;
-      margin-top: 20px;
-      opacity: 0.9;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    section {
-      padding: 80px 10%;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    h2 {
-      font-size: 2.4rem;
-      margin-bottom: 20px;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 40px;
-      margin-top: 40px;
-    }
-
-    .service-card {
-      background: #151518;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0px 0px 20px rgba(0,0,0,0.4);
-    }
-
-    .footer {
-      text-align: center;
-      padding: 40px;
-      opacity: 0.5;
-      font-size: 0.9rem;
-    }
-  </style>
+  /* Parallax */
+  .parallax {
+    transform: translateY(var(--scroll-offset));
+    transition: transform 0.15s linear;
+  }
+</style>
 </head>
-<body>
 
-<header>
-  <img src="Image.jpg" class="logo" alt="Melbote Logo" />
-  <nav>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#mission">Mission</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
+<body class="overflow-x-hidden">
 
-<section class="hero">
-  <h1>Innovating Retail, Powering Digital Growth</h1>
-  <p>Melbote is the ANZ & Pacific arm of global technology leaders TechRyde and eMultec Solution — delivering POS innovation, enterprise integration, and digital transformation with global expertise and local delivery.</p>
-</section>
+<!-- Cursor glow -->
+<div id="cursorLight" class="cursor-light"></div>
 
-<section id="about">
-  <h2>About Melbote</h2>
-  <p>Melbote is an Australian-based IT professional services consulting company and the ANZ & Pacific subsidiary of TechRyde and eMultec Solution. We deliver enterprise-grade technology services backed by global engineering excellence.</p>
-</section>
+<!-- Preloader -->
+<div id="preloader">
+  <div class="flex">
+    <div class="loader-dot"></div>
+    <div class="loader-dot"></div>
+    <div class="loader-dot"></div>
+  </div>
+</div>
 
-<section id="mission">
-  <h2>Mission & Vision</h2>
-  <p><strong>Mission:</strong> Empower organisations with connected, intelligent, and modern digital technologies.</p>
-  <p><strong>Vision:</strong> Become the most trusted partner for POS modernisation, enterprise integrations, and digital transformation in the region.</p>
-</section>
+<!-- NAV -->
+<nav class="fixed top-0 left-0 w-full z-50 bg-[#0F0F10]/80 backdrop-blur-xl border-b border-white/10">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+    <h1 class="text-xl text-white font-light tracking-widest">MELBOTE</h1>
+    <div class="space-x-8 text-sm text-gray-300">
+      <a href="index.html" class="hover:text-white">Home</a>
+      <a href="about.html" class="hover:text-white">About</a>
+      <a href="services.html" class="hover:text-white">Services</a>
+      <a href="contact.html" class="hover:text-white">Contact</a>
+    </div>
+  </div>
+</nav>
 
-<section id="services">
-  <h2>Our Services</h2>
-  <div class="services-grid">
-    <div class="service-card"><h3>POS & Retail Integrations</h3><p>End-to-end POS modernisation, payment integrations, and multi-store system deployments.</p></div>
-    <div class="service-card"><h3>Salesforce Consulting</h3><p>Implementation, customisation, integration, and managed services.</p></div>
-    <div class="service-card"><h3>Digital Transformation</h3><p>Custom applications, automation, cloud-native systems, and AI-driven solutions.</p></div>
-    <div class="service-card"><h3>Product Engineering</h3><p>Microservices, API development, cloud engineering, and enterprise software builds.</p></div>
+<!-- HERO -->
+<section class="h-screen flex items-center justify-center text-center relative mt-24">
+  <div class="parallax" style="--scroll-offset:0px;">
+    <h2 class="text-6xl md:text-8xl text-white font-light tracking-tight">
+      Digital <span class="text-[#FF453A]">Integration</span>
+    </h2>
+    <p class="mt-6 text-lg text-gray-400">
+      POS • Retail Integrations • Salesforce • AI • Modern Applications
+    </p>
   </div>
 </section>
 
-<section id="contact">
-  <h2>Contact Us</h2>
-  <p>Email: info@melbote.com</p>
-  <p>Australia | New Zealand | Pacific</p>
+<!-- CONTENT -->
+<section class="max-w-5xl mx-auto px-6 py-24">
+  <h3 class="text-3xl text-white mb-6">Crafting Modern Retail Solutions</h3>
+  <p class="text-gray-400 leading-relaxed">
+    We build future-focused digital systems for POS, retail, and enterprise ecosystems
+    using the latest integration, automation, and AI technologies.
+  </p>
 </section>
 
-<div class="footer">
-  © 2025 Melbote. All rights reserved.
-</div>
+<script>
+  /* Preloader disappear */
+  window.onload = () => {
+    document.getElementById("preloader").style.opacity = "0";
+    setTimeout(() => document.getElementById("preloader").style.display = "none", 500);
+  };
+
+  /* Cursor light animation */
+  const cursorLight = document.getElementById("cursorLight");
+  document.addEventListener("mousemove", (e) => {
+    cursorLight.style.left = e.clientX + "px";
+    cursorLight.style.top = e.clientY + "px";
+    cursorLight.style.opacity = 1;
+  });
+
+  /* Parallax scroll */
+  window.addEventListener("scroll", () => {
+    document.querySelectorAll(".parallax").forEach(el => {
+      const offset = window.scrollY * 0.2;
+      el.style.setProperty("--scroll-offset", offset + "px");
+    });
+  });
+</script>
 
 </body>
 </html>
